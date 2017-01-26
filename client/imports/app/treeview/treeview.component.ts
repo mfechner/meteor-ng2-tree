@@ -1,12 +1,10 @@
 import { Component, OnInit, Input } from "@angular/core";
-
+import { Observable } from "rxjs";
 
 import template from "./treeview.component.html";
 import style from "./treeview.component.scss";
 
-import { Locations } from "../../../../both/models/locations.model";
-import { LocationsService } from "./locations.service";
-import { Observable } from "rxjs";
+import { CategoriesDataService } from "../categories/categories.service";
 
 @Component({
     selector: "app-treeview",
@@ -14,18 +12,14 @@ import { Observable } from "rxjs";
     styles: [ style ]
 })
 export class TreeviewComponent implements OnInit {
-    @Input() root: string[];
-    nodes: Locations[];
-    private subscription;
-    locations: Observable<any[]>;
+    @Input() subNodes: string[];
+    nodes: Observable<any[]>;
 
-
-    constructor(private locationsService: LocationsService) {}
+    constructor(private categoriesDataService: CategoriesDataService) {}
 
     ngOnInit() {
-        console.log("TreeviewComponent in ngOnInit, root is:", this.root);
-
-        this.locations=this.locationsService.getData(this.root).zone();
+        console.log("TreeviewComponent in ngOnInit, root is:", this.subNodes);
+        this.nodes=this.categoriesDataService.getData(this.subNodes).zone();
     }
 
 }

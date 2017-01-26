@@ -1,6 +1,7 @@
 import {DemoCollection} from "../../../both/collections/demo.collection";
 import {Demo} from "../../../both/models/demo.model";
 import { LocationsCollection } from "../../../both/collections/locations.collection";
+import { CategoriesCollection } from "../../../both/collections/categories.collection";
 
 
 export class Main {
@@ -24,46 +25,46 @@ export class Main {
         DemoCollection.insert(obj);
       });
     }
-    if (LocationsCollection.find({}).cursor.count() === 0) {
-      console.log("Create standard Locations collection");
+    if (CategoriesCollection.find({}).cursor.count() === 0) {
+      console.log("Create standard categories collection");
 
-      LocationsCollection.insert({
+      CategoriesCollection.insert({
         _id: "ROOT_NODE",
         children:[]
       }).subscribe( id => {
-        LocationsCollection.insert({
+        CategoriesCollection.insert({
           _id: "Passiv",
           children: []
         }).subscribe( id => {
-          LocationsCollection.insert({
+          CategoriesCollection.insert({
             _id: "Widerstand",
             children: []
           });
-          LocationsCollection.update({_id: id}, {$addToSet: {children: "Widerstand"}});
-          LocationsCollection.insert({
+          CategoriesCollection.update({_id: id}, {$addToSet: {children: "Widerstand"}});
+          CategoriesCollection.insert({
             _id: "Diode",
             children: []
           });
-          LocationsCollection.update({_id: id}, {$addToSet: {children: "Diode"}});
+          CategoriesCollection.update({_id: id}, {$addToSet: {children: "Diode"}});
         });
-        LocationsCollection.update({_id: id}, {$addToSet: {children: "Passiv"}});
+        CategoriesCollection.update({_id: id}, {$addToSet: {children: "Passiv"}});
 
-        LocationsCollection.insert({
+        CategoriesCollection.insert({
           _id: "Aktiv",
           children: []
         }).subscribe( (id) => {
-          LocationsCollection.insert({
+          CategoriesCollection.insert({
             _id: "Mikrokontroller",
             children: []
           });
-          LocationsCollection.update({_id: id}, {$addToSet: {children: "Mikrokontroller"}});
-          LocationsCollection.insert({
+          CategoriesCollection.update({_id: id}, {$addToSet: {children: "Mikrokontroller"}});
+          CategoriesCollection.insert({
             _id: "ICs",
             children: []
           });
-          LocationsCollection.update({_id: id}, {$addToSet: {children: "ICs"}});
+          CategoriesCollection.update({_id: id}, {$addToSet: {children: "ICs"}});
         });
-        LocationsCollection.update({_id: id}, {$addToSet: {children: "Aktiv"}});
+        CategoriesCollection.update({_id: id}, {$addToSet: {children: "Aktiv"}});
 
       });
     }

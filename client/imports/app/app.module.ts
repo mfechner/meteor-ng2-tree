@@ -5,9 +5,8 @@ import { DemoComponent } from "./demo/demo.component";
 import { DemoDataService } from "./demo/demo-data.service";
 
 import { TreeviewComponent } from "./treeview/treeview.component";
-import { TreeviewDataService } from "./treeview/treeview.service";
-import { LocationsService } from "./treeview/locations.service";
-import { CategoriesComponent } from "./treeview/categories.component";
+import { CategoriesDataService } from "./categories/categories.service";
+import { CategoriesComponent } from "./categories/categories.component";
 
 @NgModule({
   // Components, Pipes, Directive
@@ -24,8 +23,7 @@ import { CategoriesComponent } from "./treeview/categories.component";
   // Providers
   providers: [
     DemoDataService,
-      TreeviewDataService,
-      LocationsService
+    CategoriesDataService
   ],
   // Modules
   imports: [

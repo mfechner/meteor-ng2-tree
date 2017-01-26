@@ -1,4 +1,4 @@
-import { Injectable, Input } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { ObservableCursor } from "meteor-rxjs";
 import { Treeview } from "../../../../both/models/treeview.model";
 import { TreeviewCollection } from "../../../../both/collections/treeview.collection";
