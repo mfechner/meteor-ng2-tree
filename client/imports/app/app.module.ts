@@ -4,11 +4,18 @@ import { AppComponent } from "./app.component";
 import { DemoComponent } from "./demo/demo.component";
 import { DemoDataService } from "./demo/demo-data.service";
 
+import { TreeviewComponent } from "./treeview/treeview.component";
+import { TreeviewDataService } from "./treeview/treeview.service";
+import { LocationsService } from "./treeview/locations.service";
+import { CategoriesComponent } from "./treeview/categories.component";
+
 @NgModule({
   // Components, Pipes, Directive
   declarations: [
     AppComponent,
-    DemoComponent
+    DemoComponent,
+      TreeviewComponent,
+      CategoriesComponent
   ],
   // Entry Components
   entryComponents: [
@@ -16,7 +23,9 @@ import { DemoDataService } from "./demo/demo-data.service";
   ],
   // Providers
   providers: [
-    DemoDataService
+    DemoDataService,
+      TreeviewDataService,
+      LocationsService
   ],
   // Modules
   imports: [

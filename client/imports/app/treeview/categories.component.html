@@ -1,0 +1,10 @@
+<h1>Lazy loaded TreeView using collections from Meteor</h1>
+<ul>
+    <li *ngFor="let location of locations | async">
+        {{location._id}}, Children [{{location.children}}]
+        <div *ngIf="location.children">
+            <app-treeview [root]="location.children"></app-treeview>
+        </div>
+    </li>
+</ul>
+

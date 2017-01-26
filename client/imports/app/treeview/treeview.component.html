@@ -1,0 +1,9 @@
+<ul>
+    <li *ngFor="let location of locations | async">
+        {{location._id}}
+
+        <div *ngIf="location.children">
+            <app-treeview [root]="location.children"></app-treeview>
+        </div>
+    </li>
+</ul>
