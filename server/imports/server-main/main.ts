@@ -56,6 +56,12 @@ export class Main {
           CategoriesCollection.insert({
             _id: "Mikrokontroller",
             children: []
+          }).subscribe( id => {
+            CategoriesCollection.insert({
+              _id: "Atmel",
+              children: []
+            });
+            CategoriesCollection.update({_id: id}, {$addToSet: {children: "Atmel"}});
           });
           CategoriesCollection.update({_id: id}, {$addToSet: {children: "Mikrokontroller"}});
           CategoriesCollection.insert({

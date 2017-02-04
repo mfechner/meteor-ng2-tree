@@ -1,8 +1,9 @@
 <ul>
     <li *ngFor="let node of nodes | async">
+        <span class="iconButton" (click)="toggle(node)">{{ getIcon(node) }}</span>
         {{node._id}}
 
-        <div *ngIf="node.children">
+        <div *ngIf="node.children && node.expanded">
             <app-treeview [subNodes]="node.children"></app-treeview>
         </div>
     </li>
