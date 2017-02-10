@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, OnDestroy } from "@angular/core";
 import { Observable } from "rxjs";
 
 import template from "./treeview.component.html";
@@ -10,17 +10,34 @@ import { CategoriesDataService } from "../categories/categories.service";
     template,
     styles: [ style ]
 })
-export class TreeviewComponent implements OnInit {
+export class TreeviewComponent implements OnInit, OnDestroy {
     @Input() subNodes: string[];
-    nodes: Observable<any[]>;
+    @Input() dataService: any;
+    @Input() config: any;
+    nodes: any[];
     icon: string;
+    nodesSubscription: any;
 
-    constructor(private categoriesDataService: CategoriesDataService) {}
+    constructor() {}
 
     ngOnInit() {
         console.log("TreeviewComponent in ngOnInit, root is:", this.subNodes);
+        console.log("dataService", this.dataService);
+        console.log("Config", this.config);
         this.icon = this.getIcon(null);
-        this.nodes=this.categoriesDataService.getData(this.subNodes).zone();
+        this.nodesSubscription = this.dataService.getData(this.subNodes).subscribe(nodes => {
+            // Should we hide the root node?
+            this.nodes = nodes;
+            console.log("Node", nodes);
+                if(!this.config.showRootNode) {
+                    this.toggle(nodes);
+                }
+
+        });
+    }
+
+    ngOnDestroy() {
+        this.nodesSubscription.unsubscribe();
     }
 
     toggle(node) {

@@ -1,7 +1,4 @@
 <h1>Lazy loaded TreeView using collections from Meteor</h1>
-<div *ngFor="let category of categories | async">
-
-    <app-treeview [subNodes]="category.children"></app-treeview>
-</div>
+<app-treeview [dataService]="categoriesDataService" [config]="treeConfig"></app-treeview>
 
 
