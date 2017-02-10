@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, OnDestroy } from "@angular/core";
-import { Observable } from "rxjs";
 
 import template from "./treeview.component.html";
 import style from "./treeview.component.scss";
 
-import { CategoriesDataService } from "../categories/categories.service";
+import { TreeviewConfig } from "./treeviewconfig.model";
+
 @Component({
     selector: "app-treeview",
     template,
@@ -13,7 +13,7 @@ import { CategoriesDataService } from "../categories/categories.service";
 export class TreeviewComponent implements OnInit, OnDestroy {
     @Input() subNodes: string[];
     @Input() dataService: any;
-    @Input() config: any;
+    @Input() config: TreeviewConfig;
     nodes: any[];
     icon: string;
     nodesSubscription: any;
@@ -21,18 +21,19 @@ export class TreeviewComponent implements OnInit, OnDestroy {
     constructor() {}
 
     ngOnInit() {
-        console.log("TreeviewComponent in ngOnInit, root is:", this.subNodes);
-        console.log("dataService", this.dataService);
-        console.log("Config", this.config);
         this.icon = this.getIcon(null);
         this.nodesSubscription = this.dataService.getData(this.subNodes).subscribe(nodes => {
-            // Should we hide the root node?
-            this.nodes = nodes;
-            console.log("Node", nodes);
-                if(!this.config.showRootNode) {
-                    this.toggle(nodes);
-                }
-
+            // Are we the ROOT_NODE and should we hide it?
+            if(!this.config.showRootNode && nodes[0]._id == "ROOT_NODE") {
+                this.nodesSubscription.unsubscribe();
+                this.nodesSubscription = this.dataService.getData(nodes[0].children).subscribe(nodes => {
+                    this.checkAutoExpand(nodes);
+                    this.nodes = nodes;
+                });
+            } else {
+                this.checkAutoExpand(nodes);
+                this.nodes = nodes;
+            }
         });
     }
 
@@ -40,8 +41,19 @@ export class TreeviewComponent implements OnInit, OnDestroy {
         this.nodesSubscription.unsubscribe();
     }
 
+    checkAutoExpand(nodes) {
+        if(!this.config.autoExpand) {
+            return;
+        }
+        nodes.forEach(el => {
+            el.expanded=true;
+        });
+    }
+
     toggle(node) {
-        node.expanded = !node.expanded;
+        if(node.children.length > 0) {
+            node.expanded = !node.expanded;
+        }
         this.icon = this.getIcon(node);
     }
 
