@@ -17,14 +17,12 @@ export class CategoriesDataService {
 
     // Add index to children
 
-    public addNode(parentNode, node) {
-        // db.categories.insert({node})
-        // db.categories.update({parentNode}, {$addToSet: {children: 'node._id'}})
+    public insert(node) {
         CategoriesCollection.insert(node);
-        if(!parentNode._id) {
-            parentNode._id = "ROOT_NODE";
-        }
-        CategoriesCollection.update({_id: parentNode._id}, {$addToSet: {children: node._id}});
+    }
+
+    public update(node, query) {
+        CategoriesCollection.update(node, query);
     }
 
     public removeNode(parentNode, node) {
@@ -45,9 +43,10 @@ export class CategoriesDataService {
             children.forEach( id => {
                 this.removeNode(node, CategoriesCollection.findOne({_id: id}));
             })
+        } else {
+            CategoriesCollection.update({_id: parentNode._id}, {$pull: {children: node._id}});
+            CategoriesCollection.remove({_id: node._id});
         }
-        CategoriesCollection.update({_id: parentNode._id}, {$pull: {children: node._id}});
-        CategoriesCollection.remove({_id: node._id});
     }
 
     public updateNode(parentNode, oldNode, newNode) {

@@ -70,9 +70,18 @@ export class TreeviewComponent implements OnInit, OnDestroy {
 
     addNode(node) {
         console.log("Add node", node, " on Parent", this.parentNode);
+        // for testing lets create test dummy data
         let number = Math.random();
         let newId = "Test" + number;
-        this.dataService.addNode(node, {_id: newId, children: []});
+
+
+        //this.dataService.addNode(node, {_id: newId, children: []});
+
+        this.dataService.insert({_id: newId, children: []});
+        if(!this.parentNode._id) {
+            this.parentNode._id = "ROOT_NODE";
+        }
+        this.dataService.update({_id: node._id}, {$addToSet: {children: newId}});
     }
 
     removeNode(node) {
