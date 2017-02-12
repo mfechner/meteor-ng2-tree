@@ -2,7 +2,7 @@
     <li [class.root]="node._id == 'ROOT_NODE' || parentNode._id == 'ROOT_NODE'">
         <span [class.root]="node._id == 'ROOT_NODE'">{{node._id}}</span>
         <button class="addNode" (click)="addNode(node)">Add</button>
-        <button class="removeNode" (click)="removeNode(node)">Remove</button>
+        <button class="removeNode" (click)="removeNode(node)" *ngIf="node._id != 'ROOT_NODE'">Remove</button>
 
         <div *ngIf="node.children && node.expanded">
             <app-treeview [dataService]="dataService" [subNodes]="node.children" [config]="config" [parentNode]="node"></app-treeview>
