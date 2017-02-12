@@ -11,8 +11,8 @@ import { TreeviewConfig } from "../treeview/treeviewconfig.model";
 })
 export class CategoriesComponent implements OnInit{
     treeConfig: TreeviewConfig = {
-        showRootNode: false,
-        autoExpand: true
+        showRootNode: true,
+        collapsed: true
     };
 
     constructor(private categoriesDataService: CategoriesDataService) {}

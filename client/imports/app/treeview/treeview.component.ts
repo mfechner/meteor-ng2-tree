@@ -13,7 +13,8 @@ import { TreeviewConfig } from "./treeviewconfig.model";
 export class TreeviewComponent implements OnInit, OnDestroy {
     @Input() subNodes: string[];
     @Input() dataService: any;
-    @Input() config: TreeviewConfig;
+    @Input() config: TreeviewConfig = {};
+    @Input() parentNode: any = {};
     nodes: any[];
     icon: string;
     nodesSubscription: any;
@@ -42,16 +43,15 @@ export class TreeviewComponent implements OnInit, OnDestroy {
     }
 
     checkAutoExpand(nodes) {
-        if(!this.config.autoExpand) {
-            return;
+        if(!this.config.collapsed) {
+            nodes.forEach(el => {
+                el.expanded=true;
+            });
         }
-        nodes.forEach(el => {
-            el.expanded=true;
-        });
     }
 
     toggle(node) {
-        if(node.children.length > 0) {
+        if(node.children && node.children.length > 0) {
             node.expanded = !node.expanded;
         }
         this.icon = this.getIcon(node);
@@ -66,6 +66,18 @@ export class TreeviewComponent implements OnInit, OnDestroy {
             }
         }
         return "";
+    }
+
+    addNode(node) {
+        console.log("Add node", node, " on Parent", this.parentNode);
+        let number = Math.random();
+        let newId = "Test" + number;
+        this.dataService.addNode(node, {_id: newId, children: []});
+    }
+
+    removeNode(node) {
+        console.log("Remove node", node, " on Parent", this.parentNode);
+        this.dataService.removeNode(this.parentNode, node);
     }
 
 }
