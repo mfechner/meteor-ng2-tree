@@ -24,17 +24,8 @@ export class TreeviewComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.icon = this.getIcon(null);
         this.nodesSubscription = this.dataService.getData(this.subNodes).subscribe(nodes => {
-            // Are we the ROOT_NODE and should we hide it?
-            if(!this.config.showRootNode && nodes[0] && nodes[0]._id == "ROOT_NODE") {
-                this.nodesSubscription.unsubscribe();
-                this.nodesSubscription = this.dataService.getData(nodes[0].children).subscribe(nodes => {
-                    this.checkAutoExpand(nodes);
-                    this.nodes = nodes;
-                });
-            } else {
-                this.checkAutoExpand(nodes);
-                this.nodes = nodes;
-            }
+            this.checkAutoExpand(nodes);
+            this.nodes = nodes;
         });
     }
 

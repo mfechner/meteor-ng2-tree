@@ -12,7 +12,7 @@ import { TreeviewConfig } from "../treeview/treeviewconfig.model";
 export class CategoriesComponent implements OnInit{
     treeConfig: TreeviewConfig = {
         showRootNode: true,
-        collapsed: true
+        collapsed: false
     };
 
     constructor(private categoriesDataService: CategoriesDataService) {}
