@@ -1,8 +1,6 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppComponent } from "./app.component";
-import { DemoComponent } from "./demo/demo.component";
-import { DemoDataService } from "./demo/demo-data.service";
 
 import { TreeviewComponent } from "./treeview/treeview.component";
 import { CategoriesDataService } from "./categories/categories.service";
@@ -12,7 +10,6 @@ import { CategoriesComponent } from "./categories/categories.component";
   // Components, Pipes, Directive
   declarations: [
     AppComponent,
-    DemoComponent,
       TreeviewComponent,
       CategoriesComponent
   ],
@@ -22,7 +19,6 @@ import { CategoriesComponent } from "./categories/categories.component";
   ],
   // Providers
   providers: [
-    DemoDataService,
     CategoriesDataService
   ],
   // Modules

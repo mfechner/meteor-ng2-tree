@@ -1,5 +1,3 @@
-import {DemoCollection} from "../../../both/collections/demo.collection";
-import {Demo} from "../../../both/models/demo.model";
 import { LocationsCollection } from "../../../both/collections/locations.collection";
 import { CategoriesCollection } from "../../../both/collections/categories.collection";
 
@@ -10,21 +8,7 @@ export class Main {
   }
 
   initFakeData(): void {
-    if (DemoCollection.find({}).cursor.count() === 0) {
-      const data: Demo[] = [{
-        name: "Dotan",
-        age: 25
-      }, {
-        name: "Liran",
-        age: 26
-      }, {
-        name: "Uri",
-        age: 30
-      }];
-      data.forEach((obj: Demo) => {
-        DemoCollection.insert(obj);
-      });
-    }
+
     if (CategoriesCollection.find({}).cursor.count() === 0) {
       console.log("Create standard categories collection");
 
