@@ -4,8 +4,28 @@
   display: inline-block;
 }
 
+i.iconButton {
+  margin-right: .3em;
+  position: relative;
+  top: 0.1em;
+}
+
 ul {
   list-style-type: none;
   padding: 0;
   margin-left: 1em;
+}
+
+li {
+  padding: 0;
+  margin-left: 0;
+}
+
+ul.root, li.root {
+  margin-left: 0;
+  padding: 0;
+}
+
+span.root, i.root {
+  display: none;
 }

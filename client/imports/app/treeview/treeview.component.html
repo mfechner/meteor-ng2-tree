@@ -1,5 +1,6 @@
 <ul *ngFor="let node of nodes" [class.root]="node._id == 'ROOT_NODE' || parentNode._id == 'ROOT_NODE'">
     <li [class.root]="node._id == 'ROOT_NODE' || parentNode._id == 'ROOT_NODE'">
+        <i class="iconButton fa" [class.fa-minus]="getIcon(node) == '-'" [class.fa-plus]="getIcon(node) == '+'" (click)="toggle(node)" [class.root]="node._id == 'ROOT_NODE'"></i>
         <span [class.root]="node._id == 'ROOT_NODE'">{{node._id}}</span>
         <button class="addNode" (click)="addNode(node)">Add</button>
         <button class="removeNode" (click)="removeNode(node)" *ngIf="node._id != 'ROOT_NODE'">Remove</button>
