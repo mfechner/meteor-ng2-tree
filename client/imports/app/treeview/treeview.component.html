@@ -1,11 +1,11 @@
 <ul *ngFor="let node of nodes" [class.root]="node._id == 'ROOT_NODE' || parentNode._id == 'ROOT_NODE'">
     <li [class.root]="node._id == 'ROOT_NODE' || parentNode._id == 'ROOT_NODE'">
-        <i class="iconButton fa" [class.fa-minus]="getIcon(node) == '-'" [class.fa-plus]="getIcon(node) == '+'" (click)="toggle(node)" [class.root]="node._id == 'ROOT_NODE'"></i>
+        <i role="button" class="iconButton fa" [class.fa-chevron-down]="getIcon(node) == '-'" [class.fa-chevron-right]="getIcon(node) == '+'" (click)="toggle(node)" [class.root]="node._id == 'ROOT_NODE'" *ngIf="node._id != 'ROOT_NODE'"></i>
         <span [class.root]="node._id == 'ROOT_NODE'">{{node._id}}</span>
-        <button class="addNode" (click)="addNode(node)">Add</button>
-        <button class="removeNode" (click)="removeNode(node)" *ngIf="node._id != 'ROOT_NODE'">Remove</button>
+        <i role="button" class="add fa fa-plus-circle" (click)="addNode(node)" [class.root]="node._id == 'ROOT_NODE'"></i>
+        <i role="button" class="remove fa fa-minus-circle" (click)="removeNode(node)" *ngIf="node._id != 'ROOT_NODE'" data-toggle="tooltip" data-placement="top" title="Remove"></i>
 
-        <div *ngIf="node.children && node.expanded">
+        <div *ngIf="node.children.length > 0 && node.expanded">
             <app-treeview [dataService]="dataService" [subNodes]="node.children" [config]="config" [parentNode]="node"></app-treeview>
         </div>
     </li>

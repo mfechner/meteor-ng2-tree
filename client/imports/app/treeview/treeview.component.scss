@@ -1,13 +1,19 @@
-.iconButton {
-  cursor: pointer;
-  width: 10px;
-  display: inline-block;
-}
-
 i.iconButton {
   margin-right: .3em;
-  position: relative;
-  top: 0.1em;
+  width: 8px;
+}
+
+i.root {
+  margin-left: 0;
+}
+
+.add {
+  color: green;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.remove {
+  color: red;
 }
 
 ul {
@@ -26,6 +32,6 @@ ul.root, li.root {
   padding: 0;
 }
 
-span.root, i.root {
+span.root {
   display: none;
 }
