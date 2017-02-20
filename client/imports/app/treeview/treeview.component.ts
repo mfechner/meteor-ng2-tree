@@ -15,9 +15,12 @@ export class TreeviewComponent implements OnInit, OnDestroy {
     @Input() dataService: any;
     @Input() config: TreeviewConfig = {};
     @Input() parentNode: any = {};
+    @Input() position: number = 0;
     nodes: any[];
     icon: string;
     nodesSubscription: any;
+
+    simpleDrop: any = null;
 
     constructor() {}
 
@@ -57,6 +60,29 @@ export class TreeviewComponent implements OnInit, OnDestroy {
             }
         }
         return "";
+    }
+
+    handleDragOver(e){
+        //console.log("Drag Over", e);
+        if(e.preventDefault) {
+            e.preventDefault();
+        }
+        e.dataTransfer.dropEffect = 'move';
+        return false;
+    }
+
+    handleDragEnter(e) {
+        //this.classList.add('over');
+        e.classList.add('over');
+
+    }
+
+    dragStart(e) {
+        console.log("Drag start");
+    }
+
+    transferDataSuccess(event) {
+        console.log("Drop completed with: ", event);
     }
 
     // Add a node directly under the ROOT_NODE
