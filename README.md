@@ -1,3 +1,18 @@
+# Angular2 Tree Component
+
+This project is using [Meteor](https://www.meteor.com/) as backend framework, make sure you have meteor installed on your computer.
+
+Install necessary packages:
+```
+npm install
+```
+Start the development server with:
+```
+meteor
+```
+
+Now access it via [http://localhost:3000](http://localhost:3000)
+
 # Angular2-Meteor Boilerplate
 
 [![bitHound Overall Score](https://www.bithound.io/github/Urigo/angular2-meteor-base/badges/score.svg)](https://www.bithound.io/github/Urigo/angular2-meteor-base) [![bitHound Dependencies](https://www.bithound.io/github/Urigo/angular2-meteor-base/badges/dependencies.svg)](https://www.bithound.io/github/Urigo/angular2-meteor-base/master/dependencies/npm)
