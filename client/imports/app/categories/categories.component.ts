@@ -5,20 +5,21 @@ import { CategoriesDataService } from "./categories.service";
 import { TreeviewConfig } from "../treeview/treeviewconfig.model";
 
 @Component({
-    selector: "app-categories",
-    template,
-    styleUrls: [ styles ]
+  selector: "app-categories",
+  template,
+  styleUrls: [ styles ]
 })
-export class CategoriesComponent implements OnInit{
-    treeConfig: TreeviewConfig = {
-        showRootNode: true,
-        collapsed: false
-    };
+export class CategoriesComponent implements OnInit {
+  treeConfig: TreeviewConfig = {
+    showRootNode: true,
+    collapsed: false
+  };
 
-    constructor(private categoriesDataService: CategoriesDataService) {}
+  constructor(private categoriesDataService: CategoriesDataService) {
+  }
 
-    ngOnInit() {
-        console.log("CategoriesComponent in ngOnInit");
-    }
+  ngOnInit() {
+    console.log("CategoriesComponent in ngOnInit");
+  }
 
 }

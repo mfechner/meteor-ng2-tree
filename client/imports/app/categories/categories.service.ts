@@ -10,7 +10,7 @@ export class CategoriesDataService {
     constructor() {}
 
     public getData(id: string[] = ["ROOT_NODE"]): ObservableCursor<Categories> {
-        //console.log("Get ROOT_NODE with _id $in: ", id);
+        console.log("Get Data with _id $in: ", id);
         this.data = CategoriesCollection.find({_id: { $in: id}});
         return this.data;
     }

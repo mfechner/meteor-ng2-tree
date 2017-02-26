@@ -11,8 +11,8 @@ import { TreeModule } from "angular2-tree-component";
   // Components, Pipes, Directive
   declarations: [
     AppComponent,
-      TreeviewComponent,
-      CategoriesComponent
+    TreeviewComponent,
+    CategoriesComponent
   ],
   // Entry Components
   entryComponents: [
@@ -25,10 +25,10 @@ import { TreeModule } from "angular2-tree-component";
   // Modules
   imports: [
     BrowserModule,
-      TreeModule
+    TreeModule
   ],
   // Main Component
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor() {
