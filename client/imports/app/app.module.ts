@@ -2,17 +2,13 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppComponent } from "./app.component";
 
-import { TreeviewComponent } from "./treeview/treeview.component";
 import { CategoriesDataService } from "./categories/categories.service";
-import { CategoriesComponent } from "./categories/categories.component";
 import { TreeModule } from "angular2-tree-component";
 
 @NgModule({
   // Components, Pipes, Directive
   declarations: [
-    AppComponent,
-    TreeviewComponent,
-    CategoriesComponent
+    AppComponent
   ],
   // Entry Components
   entryComponents: [

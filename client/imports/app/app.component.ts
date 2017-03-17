@@ -10,44 +10,59 @@ import { CategoriesDataService } from "./categories/categories.service";
   styles: [ style ]
 })
 export class AppComponent implements OnInit, OnDestroy {
-  nodes: any[];
+  nodes = [];
 
   options;
   nodesSubscription;
 
   constructor(private categoriesDataService: CategoriesDataService) {
     this.options = {
-      getChildren: (node: TreeNode) => {
-        console.log("Called getChildren with", node);
-        return this.categoriesDataService.getData(node.children)
-          .subscribe(res => {
-            console.log("In data subscribe");
-            let children = [];
-            for (let r of res) {
-              console.log("Child in loop", r);
-              children.push(r);
-            }
-            console.log("All children", children);
-            return children;
-          });
-      },
-      idField: "_id",
-      displayField: "_id"
+      getChildren: this.getChildren.bind(this),
+      //idField: "id",
+      //displayField: "id"
     };
 
   }
 
+    getChildren (node: TreeNode) {
+        console.log("Called getChildren with", node);
+/*
+        return this.categoriesDataService.getData(node.childrenIds)
+        .subscribe(res => {
+            console.log("In data subscribe");
+            let children = [];
+            for (let r of res) {
+                console.log("Child in loop", r);
+                children.push(r);
+            }
+        });
+        */
+    }
+
+
   ngOnInit() {
-    console.log("app.component ngOnInit");
+    console.log("In app.component ngOnInit");
     this.nodesSubscription = this.categoriesDataService.getData()
       .subscribe(res => {
-        console.log("ngOnInit", res);
-        this.nodes = res;
-        console.log("nodes=", this.nodes);
+        console.log("ngOnInit Subscription", res);
+        this.nodes.push(this.toNode(res[0]));
+        //  this.nodes.push({id: "1", name: "Test"});
+        console.log("Transformed nodes to", this.nodes);
       });
+    console.log("Finished ngOnInit");
   }
 
   ngOnDestroy() {
     this.nodesSubscription.unsubscribe();
+  }
+
+  toNode(dataset) {
+      console.log("toNode with ", dataset);
+      console.log("Length: ", dataset.children.length);
+      return {
+          id: dataset._id,
+          name: dataset._id,
+          hasChildren: dataset.children.length
+      };
   }
 }
