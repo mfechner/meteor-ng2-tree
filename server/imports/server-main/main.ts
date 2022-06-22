@@ -14,47 +14,55 @@ export class Main {
 
       CategoriesCollection.insert({
         _id: "ROOT_NODE",
-        children:[]
+        hasChildren: true,
+        childrenIds:[]
       }).subscribe( id => {
         CategoriesCollection.insert({
           _id: "Passiv",
-          children: []
+          hasChildren: true,
+          childrenIds: []
         }).subscribe( id => {
           CategoriesCollection.insert({
             _id: "Widerstand",
-            children: []
+            hasChildren: false,
+            childrenIds: []
           });
-          CategoriesCollection.update({_id: id}, {$addToSet: {children: "Widerstand"}});
+          CategoriesCollection.update({_id: id}, {$addToSet: {childrenIds: "Widerstand"}});
           CategoriesCollection.insert({
             _id: "Diode",
-            children: []
+            hasChildren: false,
+            childrenIds: []
           });
-          CategoriesCollection.update({_id: id}, {$addToSet: {children: "Diode"}});
+          CategoriesCollection.update({_id: id}, {$addToSet: {childrenIds: "Diode"}});
         });
-        CategoriesCollection.update({_id: id}, {$addToSet: {children: "Passiv"}});
+        CategoriesCollection.update({_id: id}, {$addToSet: {childrenIds: "Passiv"}});
 
         CategoriesCollection.insert({
           _id: "Aktiv",
-          children: []
+          hasChildren: true,
+          childrenIds: []
         }).subscribe( (id) => {
           CategoriesCollection.insert({
             _id: "Mikrokontroller",
-            children: []
+            hasChildren: true,
+            childrenIds: []
           }).subscribe( id => {
             CategoriesCollection.insert({
               _id: "Atmel",
-              children: []
+              hasChildren: false,
+              childrenIds: []
             });
-            CategoriesCollection.update({_id: id}, {$addToSet: {children: "Atmel"}});
+            CategoriesCollection.update({_id: id}, {$addToSet: {childrenIds: "Atmel"}});
           });
-          CategoriesCollection.update({_id: id}, {$addToSet: {children: "Mikrokontroller"}});
+          CategoriesCollection.update({_id: id}, {$addToSet: {childrenIds: "Mikrokontroller"}});
           CategoriesCollection.insert({
             _id: "ICs",
-            children: []
+            hasChildren: false,
+            childrenIds: []
           });
-          CategoriesCollection.update({_id: id}, {$addToSet: {children: "ICs"}});
+          CategoriesCollection.update({_id: id}, {$addToSet: {childrenIds: "ICs"}});
         });
-        CategoriesCollection.update({_id: id}, {$addToSet: {children: "Aktiv"}});
+        CategoriesCollection.update({_id: id}, {$addToSet: {childrenIds: "Aktiv"}});
 
       });
     }

@@ -56,12 +56,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
     toNode(dataset) {
         console.log("toNode with ", dataset);
-        console.log("Length: ", dataset.children.length);
+        //console.log("Length: ", dataset.children.length);
         return {
             id: dataset._id,
             name: dataset._id,
-            hasChildren: dataset.children.length > 0 ? true : false,
-            childrenIds: dataset.children,
+            hasChildren: dataset.childrenIds.length > 0 ? true : false,
+            childrenIds: dataset.childrenIds,
             children: []
         };
     }
